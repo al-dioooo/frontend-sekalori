@@ -1,65 +1,130 @@
 import Image from "next/image";
+import { MainLayout } from "@/components/layout/main-layout";
+import { Badge } from "@/components/ui/badge";
+import { ButtonLink } from "@/components/ui/button-link";
+import { FAQList } from "@/components/ui/faq-list";
+import { MenuSection } from "@/components/sections/menu-section";
+import { faqItems, homeMenuItems } from "@/lib/sekalori-data";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <MainLayout activeRoute="home">
+      <section className="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-5 py-16 sm:px-8 lg:flex-row lg:gap-16 lg:px-16 lg:py-20">
+        <div className="flex flex-1 flex-col items-start gap-8">
+          <Badge>
+            <span
+              aria-hidden="true"
+              className="size-2 rounded-full bg-[#dde9e1]"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Halal Certified
+          </Badge>
+          <div className="flex max-w-xl flex-col gap-4">
+            <h1 className="font-sans text-5xl font-bold leading-none tracking-normal text-[#092514] sm:text-6xl lg:text-[80px]">
+              Isi Kalorimu Dengan
+            </h1>
+            <Image
+              src="/sekalori/logo-primary.svg"
+              alt="Sekalori"
+              width={392}
+              height={68}
+              priority
+              className="h-auto w-[260px] sm:w-[360px] lg:w-[392px]"
+            />
+          </div>
+          <p className="max-w-md font-sans text-lg leading-[1.6] text-[#404940]">
+            Premium meal prep designed for the health-conscious university
+            community. Fresh, balanced, and chef-curated nutrition delivered to
+            your door.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <ButtonLink href="/batch">Order Now</ButtonLink>
+            <ButtonLink href="#menu-batch" variant="outline">
+              View Batch
+            </ButtonLink>
+          </div>
         </div>
-      </main>
-    </div>
+
+        <div className="relative flex flex-1 items-center justify-center">
+          <div className="absolute inset-[-10%] rounded-full bg-[#8cf9b0]/20 blur-3xl" />
+          <div className="relative aspect-square w-full max-w-[560px] overflow-hidden rounded-[36px] sm:rounded-[48px]">
+            <Image
+              src="/sekalori/home-hero-bowl.png"
+              alt="A clean nutrition bowl with egg, chickpeas, grains, beans, and herbs."
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="about"
+        className="bg-[#f6f3f2] py-16 sm:py-24 lg:py-32"
+      >
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-12 px-5 sm:px-8 lg:flex-row lg:gap-24 lg:px-16">
+          <div className="relative flex-1">
+            <div className="absolute inset-[28px_-22px_-22px_28px] rounded-[28px] border-2 border-[#1a6b3a] sm:inset-[36px_-36px_-36px_36px] sm:rounded-[36px]" />
+            <div className="relative h-[340px] overflow-hidden rounded-[32px] sm:h-[500px] sm:rounded-[48px]">
+              <Image
+                src="/sekalori/home-chefs.png"
+                alt="Two chefs reviewing freshly prepared dishes in a kitchen."
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+          <div className="flex flex-1 flex-col gap-6">
+            <h2 className="font-sans text-4xl font-bold leading-tight text-[#1a6b3a] sm:text-5xl">
+              Roots in Excellence
+            </h2>
+            <p className="font-sans text-lg leading-[1.6] text-[#404940]">
+              Founded by alumni of Vokasi IPB, SEKALORI combines academic
+              precision in nutrition with the artistry of farm-to-table cooking.
+              We are dedicated to providing affordable, high-quality nutrition
+              for the future leaders of tomorrow.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <MenuSection
+        id="menu-batch"
+        title="Menu Batch"
+        description="Temukan nutrisi terbaik Anda minggu ini. Disiapkan dengan sepenuh hati menggunakan bahan-bahan musiman pilihan."
+        items={homeMenuItems}
+        action={
+          <ButtonLink href="/batch" variant="ghost" className="gap-2">
+            Lihat Detail
+            <svg viewBox="0 0 16 16" className="h-4 w-4" aria-hidden>
+              <path
+                d="M3 8h9m-3-3 3 3-3 3"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+          </ButtonLink>
+        }
+      />
+
+      <section id="faq" className="bg-[#fcf9f8] px-5 py-20 sm:py-32">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-12">
+          <div className="text-center">
+            <h2 className="font-sans text-4xl font-bold leading-tight text-[#1a6b3a] sm:text-5xl">
+              Frequently Asked Questions
+            </h2>
+            <p className="mt-4 font-sans text-lg leading-6 text-[#404940]">
+              Everything you need to know about our service.
+            </p>
+          </div>
+          <FAQList items={faqItems} />
+        </div>
+      </section>
+    </MainLayout>
   );
 }
