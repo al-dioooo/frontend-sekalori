@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Poppins } from "next/font/google";
+import { SiteMotionProvider } from "@/components/motion/site-motion-provider";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -16,9 +17,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Sekalori",
+  title: {
+    default: "Home: Isi Kalorimu dengan SEKALORI - SEKALORI Kitchen & Catering",
+    template: "SEKALORI - %s",
+  },
   description:
-    "Premium halal meal prep and catering from Bogor, built around balanced nutrition.",
+    "SEKALORI Kitchen & Catering serves halal meal prep and catering from Bogor with balanced nutrition, fresh local ingredients, and chef-curated menus.",
 };
 
 export default function RootLayout({
@@ -31,7 +35,9 @@ export default function RootLayout({
       lang="en"
       className={`${plusJakarta.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <SiteMotionProvider>{children}</SiteMotionProvider>
+      </body>
     </html>
   );
 }

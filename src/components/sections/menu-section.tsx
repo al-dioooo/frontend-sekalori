@@ -32,7 +32,7 @@ export function MenuSection({
         width={256}
         height={256}
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-20 hidden opacity-70 lg:block"
+        className="motion-image pointer-events-none absolute right-0 top-20 hidden opacity-70 lg:block"
       />
       <SectionHeader title={title} description={description} action={action} />
       <div className="grid gap-6 md:grid-cols-3">
