@@ -32,25 +32,34 @@ export function PageReveal({ children }: PageRevealProps) {
         return;
       }
 
-      gsap
-        .timeline({ defaults: { duration: 0.72, ease: "power3.out" } })
-        .from(heroTargets, {
-          autoAlpha: 0,
-          y: 26,
-          stagger: 0.08,
-          clearProps: "all",
-        })
-        .from(
-          imageTargets.slice(0, 1),
-          {
+      if (heroTargets.length > 0 || imageTargets.length > 0) {
+        const heroTimeline = gsap.timeline({
+          defaults: { duration: 0.72, ease: "power3.out" },
+        });
+
+        if (heroTargets.length > 0) {
+          heroTimeline.from(heroTargets, {
             autoAlpha: 0,
-            scale: 0.96,
-            y: 18,
-            duration: 0.85,
+            y: 26,
+            stagger: 0.08,
             clearProps: "all",
-          },
-          "<0.12",
-        );
+          });
+        }
+
+        if (imageTargets.length > 0) {
+          heroTimeline.from(
+            imageTargets.slice(0, 1),
+            {
+              autoAlpha: 0,
+              scale: 0.96,
+              y: 18,
+              duration: 0.85,
+              clearProps: "all",
+            },
+            "<0.12",
+          );
+        }
+      }
 
       if (revealTargets.length > 0) {
         gsap.set(revealTargets, { autoAlpha: 0, y: 34 });

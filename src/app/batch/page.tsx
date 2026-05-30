@@ -5,7 +5,8 @@ import { MainLayout } from "@/components/layout/main-layout";
 import { Badge } from "@/components/ui/badge";
 import { IngredientCard } from "@/components/ui/feature-cards";
 import { MenuSection } from "@/components/sections/menu-section";
-import { batchMenuItems, ingredients } from "@/lib/sekalori-data";
+import { ingredients } from "@/lib/sekalori-data";
+import { getBatchMenuItems } from "@/lib/arsanawa/menu-adapter";
 
 export const metadata: Metadata = {
   title: {
@@ -15,7 +16,9 @@ export const metadata: Metadata = {
     "Explore SEKALORI batch menus with balanced daily meals, fresh Bogor ingredients, and calorie-conscious nutrition for the week.",
 };
 
-export default function BatchPage() {
+export default async function BatchPage() {
+  const menuItems = await getBatchMenuItems();
+
   return (
     <MainLayout activeRoute="batch">
       <section className="relative overflow-hidden">
@@ -23,10 +26,11 @@ export default function BatchPage() {
         <div className="absolute bottom-10 left-0 h-64 w-64 rounded-[55%_45%_38%_62%] bg-[#dde4e0]/30 blur-3xl" />
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-5 py-16 sm:px-8 lg:flex-row lg:gap-16 lg:px-16 lg:py-20">
           <div className="flex flex-1 flex-col items-start gap-6">
-            <Badge className="motion-hero bg-[#0f5238]/10 font-body text-sm tracking-[0.05em] text-[#0f5238]">
-              <span
+            <Badge className="motion-hero !bg-[#0f5238]/10 font-body text-sm tracking-[0.05em] !text-[#0f5238]">
+              <IconCalendarWeek
+                className="h-4 w-4 text-[#0f5238]"
+                strokeWidth={1.5}
                 aria-hidden="true"
-                className="size-2 rounded-sm bg-[#0f5238]"
               />
               Nov 13 - Nov 17
             </Badge>
@@ -77,7 +81,7 @@ export default function BatchPage() {
       <MenuSection
         title="Menu Harian"
         description="Temukan nutrisi terbaik Anda minggu ini. Disiapkan dengan sepenuh hati menggunakan bahan-bahan musiman pilihan."
-        items={batchMenuItems}
+        items={menuItems}
         decorativeImage="/sekalori/batch-botanical-decor.svg"
       />
 

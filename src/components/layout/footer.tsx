@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IconBrandInstagram, IconBrandWhatsapp } from "@tabler/icons-react";
-import { footerGroups } from "@/lib/sekalori-data";
+import { footerGroups, sekaloriLinks } from "@/lib/sekalori-data";
 
 export function Footer() {
   return (
@@ -22,7 +22,9 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <Link
-                href="#"
+                href={sekaloriLinks.instagram}
+                target="_blank"
+                rel="noreferrer"
                 aria-label="Sekalori Instagram"
                 className="flex size-10 items-center justify-center rounded-full bg-[#f0eded] text-[#1a1c1a] transition duration-200 hover:-translate-y-0.5 hover:bg-[#dde9e1] active:translate-y-0 active:scale-95"
               >
@@ -33,7 +35,9 @@ export function Footer() {
                 />
               </Link>
               <Link
-                href="#"
+                href={sekaloriLinks.whatsapp}
+                target="_blank"
+                rel="noreferrer"
                 aria-label="Sekalori WhatsApp"
                 className="flex size-10 items-center justify-center rounded-full bg-[#f0eded] text-[#1a1c1a] transition duration-200 hover:-translate-y-0.5 hover:bg-[#dde9e1] active:translate-y-0 active:scale-95"
               >
