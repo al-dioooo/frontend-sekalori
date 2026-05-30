@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { IconArrowRight } from "@tabler/icons-react";
+import {
+  IconArrowRight,
+  IconCircleCheck,
+  IconSparkles,
+} from "@tabler/icons-react";
 import { MainLayout } from "@/components/layout/main-layout";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button-link";
 import { FAQList } from "@/components/ui/faq-list";
 import { MenuSection } from "@/components/sections/menu-section";
-import { faqItems, homeMenuItems } from "@/lib/sekalori-data";
+import { faqItems, sekaloriLinks } from "@/lib/sekalori-data";
+import { getHomeMenuItems } from "@/lib/arsanawa/menu-adapter";
 
 export const metadata: Metadata = {
   title: {
@@ -16,16 +21,26 @@ export const metadata: Metadata = {
     "Isi kalorimu dengan SEKALORI, layanan halal meal prep dan catering Bogor untuk menu harian yang segar, seimbang, dan siap diantar.",
 };
 
-export default function Home() {
+export default async function Home() {
+  const menuItems = await getHomeMenuItems();
+
   return (
     <MainLayout activeRoute="home">
       <section className="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-5 py-16 sm:px-8 lg:flex-row lg:gap-16 lg:px-16 lg:py-20">
         <div className="flex flex-1 flex-col items-start gap-8">
           <Badge className="motion-hero">
-            <span
-              aria-hidden="true"
-              className="size-2 rounded-full bg-[#dde9e1]"
-            />
+            <span className="relative flex size-5 items-center justify-center">
+              <IconCircleCheck
+                className="h-5 w-5 text-white"
+                strokeWidth={1.5}
+                aria-hidden="true"
+              />
+              <IconSparkles
+                className="absolute -right-2 -top-2 h-3.5 w-3.5 text-[#f5d572]"
+                strokeWidth={1.5}
+                aria-hidden="true"
+              />
+            </span>
             Halal Certified
           </Badge>
           <div className="motion-hero flex max-w-xl flex-col gap-4">
@@ -47,14 +62,20 @@ export default function Home() {
             your door.
           </p>
           <div className="motion-hero flex flex-wrap gap-4">
-            <ButtonLink href="/batch">Order Now</ButtonLink>
+            <ButtonLink
+              href={sekaloriLinks.orderForm}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Order Now
+            </ButtonLink>
             <ButtonLink href="#menu-batch" variant="outline">
               View Batch
             </ButtonLink>
           </div>
         </div>
 
-        <div className="motion-image relative flex flex-1 items-center justify-center">
+        <div className="motion-image relative flex w-full flex-1 items-center justify-center">
           <div className="absolute inset-[-10%] rounded-full bg-[#8cf9b0]/20 blur-3xl" />
           <div className="group relative aspect-square w-full max-w-[560px] overflow-hidden rounded-[36px] sm:rounded-[48px]">
             <Image
@@ -104,7 +125,7 @@ export default function Home() {
         id="menu-batch"
         title="Menu Batch"
         description="Temukan nutrisi terbaik Anda minggu ini. Disiapkan dengan sepenuh hati menggunakan bahan-bahan musiman pilihan."
-        items={homeMenuItems}
+        items={menuItems}
         action={
           <ButtonLink href="/batch" variant="ghost" className="gap-2">
             Lihat Detail

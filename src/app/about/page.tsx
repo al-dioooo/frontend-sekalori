@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { IconChefHat, IconSalad } from "@tabler/icons-react";
+import { IconAward, IconChefHat, IconSalad } from "@tabler/icons-react";
 import { MainLayout } from "@/components/layout/main-layout";
 import { Badge } from "@/components/ui/badge";
 import { BenefitCard, PartnerPanel } from "@/components/ui/feature-cards";
@@ -19,10 +19,11 @@ export default function AboutPage() {
     <MainLayout activeRoute="about">
       <section className="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-5 py-16 sm:px-8 lg:flex-row lg:gap-16 lg:px-16 lg:py-20">
         <div className="flex flex-1 flex-col items-start gap-6">
-          <Badge className="motion-hero bg-[#1a6b3a]/10 font-normal text-[#1a6b3a]">
-            <span
+          <Badge className="motion-hero border border-[#b7d5c4] !bg-[#e7f3eb] font-semibold !text-[#0f5238] shadow-sm">
+            <IconAward
+              className="h-4 w-4 text-[#0f5238]"
+              strokeWidth={1.5}
               aria-hidden="true"
-              className="size-2 rounded-full border border-[#1a6b3a]"
             />
             Premium Catering Excellence
           </Badge>

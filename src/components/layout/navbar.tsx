@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IconShoppingBag } from "@tabler/icons-react";
 import { cn } from "@/lib/classnames";
-import { navLinks, type RouteKey } from "@/lib/sekalori-data";
+import { navLinks, sekaloriLinks, type RouteKey } from "@/lib/sekalori-data";
 
 type NavbarProps = {
-  activeRoute: RouteKey;
+  activeRoute?: RouteKey;
 };
 
 export function Navbar({ activeRoute }: NavbarProps) {
@@ -51,20 +50,11 @@ export function Navbar({ activeRoute }: NavbarProps) {
           ))}
         </nav>
 
-        <div className="flex h-12 shrink-0 items-center gap-2.5">
+        <div className="flex h-12 shrink-0 items-center">
           <Link
-            href="#"
-            aria-label="Open cart"
-            className="flex size-11 items-center justify-center rounded-full border border-[#cccccc] bg-white transition duration-200 hover:-translate-y-0.5 hover:border-[#15562e] hover:bg-[#f6f3f2] active:translate-y-0 active:scale-95"
-          >
-            <IconShoppingBag
-              className="h-5 w-5 text-[#1a1c1a]"
-              strokeWidth={1.5}
-              aria-hidden="true"
-            />
-          </Link>
-          <Link
-            href="/batch"
+            href={sekaloriLinks.orderForm}
+            target="_blank"
+            rel="noreferrer"
             className="hidden rounded-full bg-[#15562e] px-6 py-3 font-sans text-sm leading-6 text-white shadow-[0_12px_24px_-18px_rgba(15,82,56,0.85)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#0f5238] hover:text-white active:translate-y-0 active:scale-95 sm:inline-flex lg:px-8 lg:text-base"
           >
             Order Now

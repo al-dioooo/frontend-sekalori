@@ -5,7 +5,7 @@ import { PageReveal } from "@/components/motion/page-reveal";
 import type { RouteKey } from "@/lib/sekalori-data";
 
 type MainLayoutProps = {
-  activeRoute: RouteKey;
+  activeRoute?: RouteKey;
   children: ReactNode;
 };
 
