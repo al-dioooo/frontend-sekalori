@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IconShoppingBag } from "@tabler/icons-react";
 import { cn } from "@/lib/classnames";
 import { navLinks, type RouteKey } from "@/lib/sekalori-data";
 
@@ -38,7 +39,7 @@ export function Navbar({ activeRoute }: NavbarProps) {
               key={link.href}
               href={link.href}
               className={cn(
-                "font-sans text-sm font-semibold leading-6 transition-colors sm:text-base",
+                "font-sans text-sm font-semibold leading-6 transition duration-200 hover:-translate-y-0.5 active:translate-y-0 sm:text-base",
                 activeRoute === link.route
                   ? "text-[#1a6b3a]"
                   : "text-[#404940] hover:text-[#15562e]",
@@ -54,33 +55,17 @@ export function Navbar({ activeRoute }: NavbarProps) {
           <Link
             href="#"
             aria-label="Open cart"
-            className="flex size-11 items-center justify-center rounded-full border border-[#cccccc] bg-white transition hover:border-[#15562e]"
+            className="flex size-11 items-center justify-center rounded-full border border-[#cccccc] bg-white transition duration-200 hover:-translate-y-0.5 hover:border-[#15562e] hover:bg-[#f6f3f2] active:translate-y-0 active:scale-95"
           >
-            <svg
-              viewBox="0 0 24 24"
+            <IconShoppingBag
               className="h-5 w-5 text-[#1a1c1a]"
+              strokeWidth={1.5}
               aria-hidden="true"
-            >
-              <path
-                d="M7 8h10l-.8 8.2a3 3 0 0 1-3 2.8h-2.4a3 3 0 0 1-3-2.8L7 8Z"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.7"
-              />
-              <path
-                d="M9 8a3 3 0 0 1 6 0"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeWidth="1.7"
-              />
-            </svg>
+            />
           </Link>
           <Link
             href="/batch"
-            className="hidden rounded-full bg-[#15562e] px-6 py-3 font-sans text-sm leading-6 text-white transition hover:bg-[#0f5238] sm:inline-flex lg:px-8 lg:text-base"
+            className="hidden rounded-full bg-[#15562e] px-6 py-3 font-sans text-sm leading-6 text-white shadow-[0_12px_24px_-18px_rgba(15,82,56,0.85)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#0f5238] hover:text-white active:translate-y-0 active:scale-95 sm:inline-flex lg:px-8 lg:text-base"
           >
             Order Now
           </Link>

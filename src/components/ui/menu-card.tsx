@@ -7,7 +7,7 @@ type MenuCardProps = {
 
 export function MenuCard({ item }: MenuCardProps) {
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#e2e3df]/70 bg-white p-px shadow-[0_10px_30px_-10px_rgba(45,106,79,0.12)]">
+    <article className="motion-reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-[#e2e3df]/70 bg-white p-px shadow-[0_10px_30px_-10px_rgba(45,106,79,0.12)] transition duration-300 hover:-translate-y-1.5 hover:border-[#bfc9bd] hover:shadow-[0_22px_46px_-28px_rgba(15,82,56,0.45)]">
       <div className="relative bg-[#f4f4f0]/70 p-4">
         <div className="relative aspect-[1.35] overflow-hidden rounded-xl">
           <Image
@@ -15,7 +15,7 @@ export function MenuCard({ item }: MenuCardProps) {
             alt={item.imageAlt}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover"
+            className="object-cover transition duration-700 group-hover:scale-105"
           />
         </div>
         <span className="absolute left-6 top-6 rounded-full border border-[#e2e3df]/70 bg-[#faf9f6]/95 px-4 py-1.5 font-body text-sm font-semibold leading-5 tracking-[0.05em] text-[#0f5238] shadow-sm backdrop-blur-sm">

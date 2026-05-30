@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IconBrandInstagram, IconBrandWhatsapp } from "@tabler/icons-react";
 import { footerGroups } from "@/lib/sekalori-data";
 
 export function Footer() {
@@ -23,26 +24,22 @@ export function Footer() {
               <Link
                 href="#"
                 aria-label="Sekalori Instagram"
-                className="flex size-10 items-center justify-center rounded-full bg-[#f0eded] transition hover:bg-[#dde9e1]"
+                className="flex size-10 items-center justify-center rounded-full bg-[#f0eded] text-[#1a1c1a] transition duration-200 hover:-translate-y-0.5 hover:bg-[#dde9e1] active:translate-y-0 active:scale-95"
               >
-                <Image
-                  src="/sekalori/social-instagram.svg"
-                  alt=""
-                  width={20}
-                  height={20}
+                <IconBrandInstagram
+                  className="h-5 w-5"
+                  strokeWidth={1.5}
                   aria-hidden="true"
                 />
               </Link>
               <Link
                 href="#"
                 aria-label="Sekalori WhatsApp"
-                className="flex size-10 items-center justify-center rounded-full bg-[#f0eded] transition hover:bg-[#dde9e1]"
+                className="flex size-10 items-center justify-center rounded-full bg-[#f0eded] text-[#1a1c1a] transition duration-200 hover:-translate-y-0.5 hover:bg-[#dde9e1] active:translate-y-0 active:scale-95"
               >
-                <Image
-                  src="/sekalori/social-whatsapp.svg"
-                  alt=""
-                  width={20}
-                  height={20}
+                <IconBrandWhatsapp
+                  className="h-5 w-5"
+                  strokeWidth={1.5}
                   aria-hidden="true"
                 />
               </Link>
@@ -59,7 +56,7 @@ export function Footer() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="font-sans text-sm font-medium leading-5 text-[#404940] transition hover:text-[#15562e]"
+                    className="font-sans text-sm font-medium leading-5 text-[#404940] transition duration-200 hover:-translate-y-0.5 hover:text-[#15562e] active:translate-y-0"
                   >
                     {link.label}
                   </Link>

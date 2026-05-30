@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import { IconArrowRight } from "@tabler/icons-react";
 import { MainLayout } from "@/components/layout/main-layout";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -6,19 +8,27 @@ import { FAQList } from "@/components/ui/faq-list";
 import { MenuSection } from "@/components/sections/menu-section";
 import { faqItems, homeMenuItems } from "@/lib/sekalori-data";
 
+export const metadata: Metadata = {
+  title: {
+    absolute: "Home: Isi Kalorimu dengan SEKALORI - SEKALORI Kitchen & Catering",
+  },
+  description:
+    "Isi kalorimu dengan SEKALORI, layanan halal meal prep dan catering Bogor untuk menu harian yang segar, seimbang, dan siap diantar.",
+};
+
 export default function Home() {
   return (
     <MainLayout activeRoute="home">
       <section className="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-5 py-16 sm:px-8 lg:flex-row lg:gap-16 lg:px-16 lg:py-20">
         <div className="flex flex-1 flex-col items-start gap-8">
-          <Badge>
+          <Badge className="motion-hero">
             <span
               aria-hidden="true"
               className="size-2 rounded-full bg-[#dde9e1]"
             />
             Halal Certified
           </Badge>
-          <div className="flex max-w-xl flex-col gap-4">
+          <div className="motion-hero flex max-w-xl flex-col gap-4">
             <h1 className="font-sans text-5xl font-bold leading-none tracking-normal text-[#092514] sm:text-6xl lg:text-[80px]">
               Isi Kalorimu Dengan
             </h1>
@@ -31,12 +41,12 @@ export default function Home() {
               className="h-auto w-[260px] sm:w-[360px] lg:w-[392px]"
             />
           </div>
-          <p className="max-w-md font-sans text-lg leading-[1.6] text-[#404940]">
+          <p className="motion-hero max-w-md font-sans text-lg leading-[1.6] text-[#404940]">
             Premium meal prep designed for the health-conscious university
             community. Fresh, balanced, and chef-curated nutrition delivered to
             your door.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="motion-hero flex flex-wrap gap-4">
             <ButtonLink href="/batch">Order Now</ButtonLink>
             <ButtonLink href="#menu-batch" variant="outline">
               View Batch
@@ -44,16 +54,16 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative flex flex-1 items-center justify-center">
+        <div className="motion-image relative flex flex-1 items-center justify-center">
           <div className="absolute inset-[-10%] rounded-full bg-[#8cf9b0]/20 blur-3xl" />
-          <div className="relative aspect-square w-full max-w-[560px] overflow-hidden rounded-[36px] sm:rounded-[48px]">
+          <div className="group relative aspect-square w-full max-w-[560px] overflow-hidden rounded-[36px] sm:rounded-[48px]">
             <Image
               src="/sekalori/home-hero-bowl.png"
               alt="A clean nutrition bowl with egg, chickpeas, grains, beans, and herbs."
               fill
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
+              className="object-cover transition duration-700 group-hover:scale-105"
             />
           </div>
         </div>
@@ -64,19 +74,19 @@ export default function Home() {
         className="bg-[#f6f3f2] py-16 sm:py-24 lg:py-32"
       >
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-12 px-5 sm:px-8 lg:flex-row lg:gap-24 lg:px-16">
-          <div className="relative flex-1">
+          <div className="motion-image relative flex-1">
             <div className="absolute inset-[28px_-22px_-22px_28px] rounded-[28px] border-2 border-[#1a6b3a] sm:inset-[36px_-36px_-36px_36px] sm:rounded-[36px]" />
-            <div className="relative h-[340px] overflow-hidden rounded-[32px] sm:h-[500px] sm:rounded-[48px]">
+            <div className="group relative h-[340px] overflow-hidden rounded-[32px] sm:h-[500px] sm:rounded-[48px]">
               <Image
                 src="/sekalori/home-chefs.png"
                 alt="Two chefs reviewing freshly prepared dishes in a kitchen."
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
+                className="object-cover transition duration-700 group-hover:scale-105"
               />
             </div>
           </div>
-          <div className="flex flex-1 flex-col gap-6">
+          <div className="motion-reveal flex flex-1 flex-col gap-6">
             <h2 className="font-sans text-4xl font-bold leading-tight text-[#1a6b3a] sm:text-5xl">
               Roots in Excellence
             </h2>
@@ -98,23 +108,18 @@ export default function Home() {
         action={
           <ButtonLink href="/batch" variant="ghost" className="gap-2">
             Lihat Detail
-            <svg viewBox="0 0 16 16" className="h-4 w-4" aria-hidden>
-              <path
-                d="M3 8h9m-3-3 3 3-3 3"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-              />
-            </svg>
+            <IconArrowRight
+              className="h-4 w-4"
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
           </ButtonLink>
         }
       />
 
       <section id="faq" className="bg-[#fcf9f8] px-5 py-20 sm:py-32">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-12">
-          <div className="text-center">
+          <div className="motion-reveal text-center">
             <h2 className="font-sans text-4xl font-bold leading-tight text-[#1a6b3a] sm:text-5xl">
               Frequently Asked Questions
             </h2>

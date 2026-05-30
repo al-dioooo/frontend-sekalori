@@ -19,7 +19,7 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "flex w-full flex-col gap-3",
+        "motion-reveal flex w-full flex-col gap-3",
         align === "center" ? "items-center text-center" : "items-start",
         className,
       )}
