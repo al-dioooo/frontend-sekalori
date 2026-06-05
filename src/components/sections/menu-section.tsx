@@ -36,8 +36,8 @@ export function MenuSection({
       />
       <SectionHeader title={title} description={description} action={action} />
       <div className="grid gap-6 md:grid-cols-3">
-        {items.map((item) => (
-          <MenuCard key={item.day} item={item} />
+        {items.map((item, index) => (
+          <MenuCard key={`${item.day}-${item.title}-${index}`} item={item} />
         ))}
       </div>
     </section>

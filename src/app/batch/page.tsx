@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { IngredientCard } from "@/components/ui/feature-cards";
 import { MenuSection } from "@/components/sections/menu-section";
 import { ingredients } from "@/lib/sekalori-data";
-import { getBatchMenuItems } from "@/lib/arsanawa/menu-adapter";
+import { getCurrentCateringBatchData } from "@/lib/arsanawa/menu-adapter";
 
 export const metadata: Metadata = {
   title: {
@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 };
 
 export default async function BatchPage() {
-  const menuItems = await getBatchMenuItems();
+  const batchData = await getCurrentCateringBatchData();
+  const { hero, items: menuItems } = batchData;
 
   return (
     <MainLayout activeRoute="batch">
@@ -32,15 +33,13 @@ export default async function BatchPage() {
                 strokeWidth={1.5}
                 aria-hidden="true"
               />
-              Nov 13 - Nov 17
+              {hero.dateRange}
             </Badge>
             <h1 className="motion-hero font-sans text-5xl font-bold leading-tight tracking-normal text-[#1a1c1a] sm:text-6xl">
-              Fiber Boost Week
+              {hero.title}
             </h1>
             <p className="motion-hero max-w-xl font-body text-lg leading-7 text-[#404943]">
-              Tingkatkan energi harian Anda dengan hidangan padat nutrisi dan
-              tinggi serat yang dirancang untuk kesehatan pencernaan. Bahan
-              segar langsung dari pertanian lokal Bogor.
+              {hero.description}
             </p>
             <div className="motion-hero flex flex-wrap gap-4 pt-2">
               <span className="inline-flex items-center gap-2 rounded-xl border border-[#bfc9bd]/30 bg-[#eeeeea] px-5 py-3 font-body text-sm font-semibold leading-5 tracking-[0.05em] text-[#1a1c1a]">
@@ -49,7 +48,7 @@ export default async function BatchPage() {
                   strokeWidth={1.5}
                   aria-hidden="true"
                 />
-                5 Days
+                {hero.daysLabel}
               </span>
               <span className="inline-flex items-center gap-2 rounded-xl border border-[#bfc9bd]/30 bg-[#eeeeea] px-5 py-3 font-body text-sm font-semibold leading-5 tracking-[0.05em] text-[#1a1c1a]">
                 <IconBowlSpoon
@@ -57,7 +56,7 @@ export default async function BatchPage() {
                   strokeWidth={1.5}
                   aria-hidden="true"
                 />
-                ~1800 kkal/hari
+                {hero.calorieLabel}
               </span>
             </div>
           </div>
@@ -66,8 +65,8 @@ export default async function BatchPage() {
             <div className="absolute inset-[16px_-16px_-16px_16px] rounded-[50%_12%_56%_22%] bg-[#b1f0ce]/30" />
             <div className="group relative h-full w-full overflow-hidden rounded-3xl border border-[#e2e3df] bg-white shadow-[0_10px_30px_-10px_rgba(45,106,79,0.12)]">
               <Image
-                src="/sekalori/batch-hero-bowl.png"
-                alt="Fiber boost bowl with quinoa, kale, avocado, and roasted sweet potato."
+                src={hero.image}
+                alt={hero.imageAlt}
                 fill
                 priority
                 sizes="(min-width: 1024px) 50vw, 100vw"
