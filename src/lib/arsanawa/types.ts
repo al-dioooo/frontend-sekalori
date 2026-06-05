@@ -3,6 +3,27 @@ export type ArsanawaApiEnvelope<T> = {
   data: T | null;
 };
 
+export type ArsanawaProductImage = {
+  id: number;
+  url: string | null;
+  original_url: string | null;
+  alt_text: string | null;
+  mime_type: string | null;
+  size_bytes: number | null;
+  width: number | null;
+  height: number | null;
+  is_primary: boolean;
+  sort_order: number | null;
+};
+
+export type ArsanawaProductUnit = {
+  id: number;
+  sku: string;
+  barcode: string | null;
+  name: string | null;
+  images: ArsanawaProductImage[];
+};
+
 export type ArsanawaProductVariant = {
   id: number;
   product_id: number;
@@ -13,6 +34,7 @@ export type ArsanawaProductVariant = {
   price: string | number | null;
   maximum_retail_price: string | number | null;
   currency_id: number | null;
+  product_unit: ArsanawaProductUnit | null;
 };
 
 export type ArsanawaExternalProduct = {
@@ -20,6 +42,7 @@ export type ArsanawaExternalProduct = {
   name: string;
   description: string | null;
   attributes: Record<string, unknown> | null;
+  images: ArsanawaProductImage[];
   variants: ArsanawaProductVariant[];
 };
 

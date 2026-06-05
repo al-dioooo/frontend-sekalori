@@ -1,4 +1,6 @@
 import "server-only";
+import http from "node:http";
+import https from "node:https";
 import { getArsanawaConfig } from "@/lib/arsanawa/config";
 import type {
   ArsanawaApiEnvelope,
@@ -13,6 +15,58 @@ type ProductLookupOptions = {
   on?: string;
 };
 
+type JsonResponse = {
+  ok: boolean;
+  statusCode: number;
+  body: unknown;
+};
+
+function requestJson(url: URL, apiKey: string): Promise<JsonResponse> {
+  return new Promise((resolve, reject) => {
+    const transport = url.protocol === "http:" ? http : https;
+    const request = transport.request(
+      url,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "X-API-Key": apiKey,
+        },
+        rejectUnauthorized: false,
+        timeout: 5000,
+      },
+      (response) => {
+        let body = "";
+
+        response.setEncoding("utf8");
+        response.on("data", (chunk: string) => {
+          body += chunk;
+        });
+        response.on("end", () => {
+          try {
+            resolve({
+              ok:
+                response.statusCode !== undefined &&
+                response.statusCode >= 200 &&
+                response.statusCode < 300,
+              statusCode: response.statusCode ?? 0,
+              body: JSON.parse(body),
+            });
+          } catch (error) {
+            reject(error);
+          }
+        });
+      },
+    );
+
+    request.on("timeout", () => {
+      request.destroy(new Error("Arsanawa ERP request timed out."));
+    });
+    request.on("error", reject);
+    request.end();
+  });
+}
+
 async function arsanawaGet<T>(
   path: string,
   searchParams?: URLSearchParams,
@@ -23,28 +77,20 @@ async function arsanawaGet<T>(
     return null;
   }
 
-  const url = new URL(`${config.baseUrl}${path}`);
-
-  searchParams?.forEach((value, key) => {
-    url.searchParams.set(key, value);
-  });
-
   try {
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "X-API-Key": config.externalApiKey,
-      },
-      cache: "no-store",
-      signal: AbortSignal.timeout(5000),
+    const url = new URL(`${config.baseUrl}${path}`);
+
+    searchParams?.forEach((value, key) => {
+      url.searchParams.set(key, value);
     });
+
+    const response = await requestJson(url, config.externalApiKey);
 
     if (!response.ok) {
       return null;
     }
 
-    const envelope = (await response.json()) as ArsanawaApiEnvelope<T>;
+    const envelope = response.body as ArsanawaApiEnvelope<T>;
     return envelope.data;
   } catch {
     return null;

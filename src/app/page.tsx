@@ -11,7 +11,7 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { FAQList } from "@/components/ui/faq-list";
 import { MenuSection } from "@/components/sections/menu-section";
 import { faqItems, sekaloriLinks } from "@/lib/sekalori-data";
-import { getHomeMenuItems } from "@/lib/arsanawa/menu-adapter";
+import { getCurrentCateringBatchData } from "@/lib/arsanawa/menu-adapter";
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +22,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const menuItems = await getHomeMenuItems();
+  const batchData = await getCurrentCateringBatchData();
+  const menuItems = batchData.items.slice(0, 3);
 
   return (
     <MainLayout activeRoute="home">
